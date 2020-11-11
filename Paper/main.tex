@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{#FastNFair: A Distributed clustering protocol for sensor sharing in vehicular networks}
+\author{Ondula}
+\date{November 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+Sensing-constrained autonomous vehicles
+
+
+Cooperative perception has been proposed by Chen et al where an autonomous vehicle can consider combining its sensing data from other connected vehicles to enhance perception. Knowing whether information shared at a given time-frame is TRUE of FALSE when considering vehicle speed is foreseen as a problem especially in the scenario where a vehicle A receives new location to add to its route from vehicle B. Clustering algorithms/protocols are known to be applied in today's Internet of Things applications to filter noise introduced by communication changes. This research proposes to build a networked application to facilitate sensor sharing within clusters. The application client Vehicles will be coordinated into clusters based on consensus algorithm, to avoid interference, then one channel will be assigned based on geographical location of the vehicles and finally data shared based on application need for each vehicle The following clustering metrics of the system will be collected and then analyzed to evaluate its performance; cluster member selection; and latency and cluster lifetime.
+
+**Why it is helpful to the field:**
+- Testing
+- Decision making in complex networks
+
+**What about this work is new**
+In this research consensus based clustering protocol
+
+
+\section{Introduction}
+
+
+Continuous Infrastructure sensing to Interference introduced by wireless technologies e.g  WiFi is viewed as a problem that impacts the perception of autonomous mobile objects (AMO) performing predictive tasks that require real-time information for decision making. This introduces the need for peers objects that could assist the “faulty” one by uploading or even downloading (via a common channel/link) already known data with exact sequence of instructions to follow so that navigation remains uninterrupted to ensure end-to-end data delivery from a source node to a destination node. In addition to broader perception needed by the AMO, high mobility introduced by it requires maximum throughput by the channel to avoid packet loss during upload or download of data.
+
+This research is interesting in that it opens an opportunity for researchers at the intersection of robotics and networking to implement applications that could enable sharing of new data to test navigation systems in a real world scenario.
+
+\section{Related Works}
+
+**Add [arguments(how different/alike it is from dynamic clustering for sensor sharing in ad-hoc vehicular networks] here**
+\begin{itemize}
+    \item Augmented Vehicular Reality
+    \item Vehicular ad-hoc networks (VANETS)
+    \item Decentralized Applications
+\end{itemize}
+
+\section{Survey Outcome}
+What we found out out:
+1. Interference in DSRC and LTE-direct problem:
+2. Clustering approaches
+
+\section{Application}
+
+I plan to design and implement a web service to demonstrate the idea of dynamic clustering based on a consensus mechanism where AMO, implemented as an agent on CARLA simulator, sends each AMOs action-based tasks for maneuvering obstacles.
+The interface consists of three main modules that communicate using HTTP and MQTT:
+\begin{itemize}
+    \item Clustering module – This module is responsible for receiving data objects from CARLA simulator as JSON objects and grouping them into GPS position. The goal for clustering is to identify similar objects within the same zone as trusted neighbors.
+    """
+Distributed Clustering Protocol
+
+I'm considering clustering protocols in the context of vehicular networks (autonomous vehicles).
+
+As a grouping mechanism I'll consider nodes as autonomous vehicle objects. Each group is assigned a
+name and location. Note that the group consists of mobile nodes transmitting over the same channel.
+A channel is broker to which a cluster publishes (transmits) to and subscribes from.
+A clustered-network is formed during transit at a given speed in a given scenario. In the experimental setup,we use the node
+speed, density and location as independent variables and cost of clustering as output for the AutoCast scenarios running on CARLA
+Environment. Nodes are identified using their IP address.
+
+Before proceeding further, let me point out a couple of assumptions and requirements made to have a prototype vehicle network be implemented as this program in the form of a
+multi-user web interface:
+
+1. That the mobility model is provided by CARLA simulator as .json objects every 10 seconds.
+2. The genesis clustering policy is based an initial agreement to form a network.
+3. Initially implemented as a web interface for 5 users playing a game.
+4. There exists a clustering policy managed by an application that determines which vehicles can enter or join a cluster.
+5. CARLA output is based on physics-based mobility models.
+6. Nodes use MQTT to communicate.
+7. Cellular-based radios are used as devices.
+
+
+#FastNFair: Distributed Clustering Protocol is implemented as follows:
+a) Wacha tusalimiane: Everyone should have to say hello and wait for a response.
+b) If a response is OK, add to cluster, otherwise
+    Every Node (Autonomous Mobile Object) agrees as per the Clustering Policy (CP).
+  - .
+  This policy is embedded in an image file. 2 types of image files are expected that contain no location data could be
+  rejected, one with location data is allowed.
+
+b) Now play the game: 1 Min Rubix Solver
+c) Winner is served first and becomes the cluster head
+d) Remainders continue competing without stopping the game.
+
+Hypothesis: No matter how fast the cars travel At any given time scale of simulation, self similarity will be observed.
+
+    \item Channel assignment module – This function for this module is to switch channels/topic to a broker.
+    \item Data sharing module – The function for this module is to allocate bandwidth to channel to facilitate faster sharing depending on the data size.
+\end{itemize}
+
+During the project B phase clustering module was chosen to be the focus for implementation before channel assignment and data sharing.
+
+\subsection{Challenges}
+\begin{itemize}
+\item The domain is new and therefore a long learning curve that wasn’t anticipated was needed in order to
+\item There is very little work published on autonomous vehicle prototypes working on the real environment.
+\item The problem itself presents a futuristic problem where there are actual autonomous vehicles without humans involved.
+\item There’s a lot of overlap with research in wireless sensor networks and distributed systems and therefore the problem itself may not be posed as a novel.
+\end{itemize}
+
+\section{HTTP vs MQTT Communication Protocols}
+\section{Methodology}
+\subsection{Dynamic Clustering}
+\subsection{Consensus Approach}
+\section{Simulations}
+\section{Discussion}
+\section{Conclusion}
+\section{Bibliography}
+\begin{enumerate}
+    \item https://research.ijcaonline.org/ncrtca/number1/ncrtca1301.pdf
+    \item Wang, J., Liu, J. and Kato, N., 2018. Networking and communications in autonomous driving: A survey. IEEE Communications Surveys & Tutorials, 21(2), pp.1243-1274.
+    \item Chen, Qi, et al. "Cooper: Cooperative perception for connected autonomous vehicles based on 3d point clouds." 2019 IEEE 39th International Conference on Distributed Computing Systems (ICDCS). IEEE, 2019.
+    \item Lamport, Leslie. "Paxos made simple." ACM Sigact News 32.4 (2001): 18-25.
+    \item Emna Daknou, Mariem Thaalbi, and Nabil Tabbane. 2015. A Fast Clustering Algorithm for VANETs. In Proceedings of the 13th International Conference on Advances in Mobile Computing and Multimedia (MoMM 2015). Association for Computing Machinery, New York, NY, USA, 195–202. DOI:https://doi.org/10.1145/2837126.2837147
+    \item https://ntrs.nasa.gov/api/citations/19910004615/downloads/19910004615.pdf
+    \item Ongaro, D. and Ousterhout, J., 2014. In search of an understandable consensus algorithm. In 2014 {USENIX} Annual Technical Conference ({USENIX}{ATC} 14) (pp. 305-319)
+    \item Qiu, H., Ahmad, F., Govindan, R., Gruteser, M., Bai, F. and Kar, G., 2017, February. Augmented vehicular reality: Enabling extended vision for future vehicles. In Proceedings of the 18th International Workshop on Mobile Computing Systems and Applications (pp. 67-72).
+    \item Westphal, C., 2017. Challenges in networking to support augmented reality and virtual reality. IEEE ICNC.
+    \item Zhang, W., Han, B. and Hui, P., 2017, August. On the networking challenges of mobile augmented reality. In Proceedings of the Workshop on Virtual Reality and Augmented Reality Network (pp. 24-29).
+    \item Tran, C., Bark, K. and Ng-Thow-Hing, V., 2013, October. A left-turn driving aid using projected oncoming vehicle paths with augmented reality. In Proceedings of the 5th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (pp. 300-307)..
+    \item hea, C., Hassanabadi, B. and Valaee, S., 2009, November. Mobility-based clustering in VANETs using affinity propagation. In GLOBECOM 2009-2009 IEEE Global Telecommunications Conference (pp. 1-6). IEEE.
+    \item https://arxiv.org/pdf/2009.01964.pdf
+    \item https://arxiv.org/pdf/2010.00355.pdf
+\end{enumerate}
+
+\section{Next Steps for Project C}
+
+\begin{itemize}
+    \item Finalize documentation of methodology
+    \item Clustering module implementation
+    \item Experiment design and Simulation
+    \item Testing and analysis of the clustering module.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,118 @@
+{
+    "blocking_state": "AgentState.NAVIGATING",
+    "brake": 0.0,
+    "brake_noise": 0.0,
+    "current_waypoint": {
+        "pitch": -1.012520670890808,
+        "roll": 0.0,
+        "x": -88.14537811279297,
+        "y": 80.52709197998047,
+        "yaw": 89.84373474121094,
+        "z": 0.7092456221580505
+    },
+    "ego_planned_trajectory": [],
+    "ego_vehicle_can_speed": 0.21357197241568865,
+    "ego_vehicle_can_timestamp": "583",
+    "ego_vehicle_id": 171,
+    "ego_vehicle_transform": {
+        "pitch": -0.997917890548706,
+        "roll": -0.0017699276795610785,
+        "x": -88.14537048339844,
+        "y": 80.52734375,
+        "yaw": 89.84333038330078,
+        "z": 0.658326268196106
+    },
+    "ego_velocity": {
+        "vx": 0.0001382667978759855,
+        "vy": 0.0027083137538284063,
+        "vz": 0.2135547548532486
+    },
+    "hand_brake": false,
+    "left_distance": -1,
+    "next_target_location": null,
+    "other_actors": {
+        "171": {
+            "bounding_box": {
+                "extent_x": 2.452350616455078,
+                "extent_y": 1.0303291082382202,
+                "extent_z": 0.7391985058784485,
+                "loc_x": 0.060644909739494324,
+                "loc_y": 0.0,
+                "loc_z": 0.7473415732383728
+            },
+            "transform": {
+                "pitch": -0.997917890548706,
+                "roll": -0.0017699276795610785,
+                "x": -88.14537048339844,
+                "y": 80.52734375,
+                "yaw": 89.84333038330078,
+                "z": 0.658326268196106
+            },
+            "type": "vehicle.lincoln.mkz2017",
+            "velocity": 0.0027118409054682747,
+            "velocity_vec": {
+                "vx": 0.0001382667978759855,
+                "vy": 0.0027083137538284063,
+                "vz": 0.2135547548532486
+            }
+        },
+        "173": {
+            "bounding_box": {
+                "extent_x": 2.073613166809082,
+                "extent_y": 1.0016015768051147,
+                "extent_z": 0.691210925579071,
+                "loc_x": 0.0,
+                "loc_y": 0.0,
+                "loc_z": 0.7043752670288086
+            },
+            "transform": {
+                "pitch": 0.0,
+                "roll": 0.0,
+                "x": -43.889949798583984,
+                "y": 131.4618682861328,
+                "yaw": 178.7031707763672,
+                "z": 0.0
+            },
+            "type": "vehicle.audi.tt",
+            "velocity": 0.0,
+            "velocity_vec": {
+                "vx": 0.0,
+                "vy": 0.0,
+                "vz": 0.0
+            }
+        },
+        "180": {
+            "bounding_box": {
+                "extent_x": 2.5996146202087402,
+                "extent_y": 1.3075095415115356,
+                "extent_z": 1.2384252548217773,
+                "loc_x": 0.0,
+                "loc_y": 0.0,
+                "loc_z": 1.2300000190734863
+            },
+            "transform": {
+                "pitch": -0.39486005902290344,
+                "roll": 0.0,
+                "x": -84.52179718017578,
+                "y": 126.65870666503906,
+                "yaw": 90.23287200927734,
+                "z": 0.1726561337709427
+            },
+            "type": "vehicle.carlamotors.carlacola",
+            "velocity": 1.2947602464577438e-08,
+            "velocity_vec": {
+                "vx": 5.262448116161167e-11,
+                "vy": -1.294749552016583e-08,
+                "vz": -4.399726390838623
+            }
+        }
+    },
+    "reverse": false,
+    "right_distance": -1,
+    "steer": 0.0,
+    "steer_noise": 0.0,
+    "target_road_option": "RoadOption.LANEFOLLOW",
+    "target_waypoint": "None",
+    "throttle": 0.0,
+    "throttle_noise": 0.0
+}

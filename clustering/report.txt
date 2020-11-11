@@ -1,0 +1,7 @@
+As pointed out by Hiroku (Introduction to the Modeling and Analysis of Complex Systems), emergence is observed as systems scale while self-organization over time.
+Complex systems are hard to engineer. This project attempts to simplify the nuanced
+complexities as observed from a prototype software model that can be used to initiate the learning
+component of a neural network architecture.
+
+This project will assume a distributed model as follows:
+
