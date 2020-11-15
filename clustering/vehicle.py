@@ -1,4 +1,4 @@
-class VehiclePacket:
+class VehicleAgent:
     def __init__(self, node_id, velocity=None, location=None, direction=None, position=None, state=None):
         self.node_id = node_id
         self.neighbors = []
@@ -7,7 +7,6 @@ class VehiclePacket:
         self.direction = direction
         self.position = position
         self.state = state
-        self.cluster_membership_type = None
 
     def broadcast_hello_message(self):
         packet = {
@@ -18,6 +17,8 @@ class VehiclePacket:
             "speed": self.velocity,
             "state": self.state
         }
+
+        # Get readings
         return packet
 
     def listen_to_state(self):
@@ -52,5 +53,13 @@ class VehiclePacket:
 
     def roam_environment(self):
         self.broadcast_hello_message()
+        # Get
+
+    def add_neighbor(self, node_id):
+        self.neighbors.append(node_id)
 
 
+    def send_gossip_messages(self):
+        return {
+            "gossip-message": "Anything, new?"
+        }

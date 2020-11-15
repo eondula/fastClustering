@@ -24,7 +24,7 @@ Problem: high mobility that results to limited time.
 
 Algorithm
 
-Environment: Road with beacons that advertise their state.
+Environment: Road with mobile beacons that advertise their state.
 Percepts: {hear({state: "3"})}
 Actuators: [send({query_destination: <cluster-head>, query_message: ""})]
 
