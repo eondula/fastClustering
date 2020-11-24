@@ -1,3 +1,8 @@
+import paho.mqtt.client as mqtt
+host_name = "127.0.0.1"
+client = mqtt.Client(client_id)
+client.connect(host_name)
+
 class VehicleAgent:
     def __init__(self, node_id, velocity=None, location=None, direction=None, position=None, state=None):
         self.node_id = node_id
@@ -7,59 +12,121 @@ class VehicleAgent:
         self.direction = direction
         self.position = position
         self.state = state
+        self.transmission_range = 50
+        self.client_id = self.node_id
 
-    def broadcast_hello_message(self):
-        packet = {
-            "packet-type": "str",
+    def set_state(self, value):
+        self.state = value
+
+    def add_neighbor(self, node_id):
+        self.neighbors.append(node_id)
+        
+
+    def hello_packet(self):
+        hello_packet = {
+            "packet-type": "HELLO Packet",
             "node-id": self.node_id,
             "direction": self.direction,
             "position": self.position,
             "speed": self.velocity,
             "state": self.state
         }
+        return hello_packet
 
-        # Get readings
-        return packet
-
-    def listen_to_state(self):
-        """
-            TODO: Mqtt subscribe
-            Subscribe to topic-"state"
-            if state == 3:
-
-                send query to cluster head.
-        """
-        if self.state == 3:
-            self.send_query_to_cluster_head(self.state)
-
-    def send_query_to_cluster_head(self, state):
-        """
-         pseudocode:
-            wait to hear from cluster head on membership
-        """
-        cluster_assignment = None
-        # This code snippet is the new thing to the implementation done in the paper.
-        if state == 3:
-            try:
-                print("Waiting for membership key to be sent")
-                cluster_assignment = "CM"
-            except:
-                print("No consensus was reached")
-                cluster_assignment = None
-        else:
-            cluster_assignment = None
-
-        return cluster_assignment
-
-    def roam_environment(self):
-        self.broadcast_hello_message()
-        # Get
-
-    def add_neighbor(self, node_id):
-        self.neighbors.append(node_id)
-
-
-    def send_gossip_messages(self):
-        return {
-            "gossip-message": "Anything, new?"
+    def triggering_packet(self, sv_id, rv_id, r_min, r_max):
+        triggering_packet = {
+            "packet-type": "TRIGGERING Packet",
+            "sv-id": sv_id,
+            "rv_id": rv_id,
+            "r-min": r_min,
+            "r-max": r_max,
         }
+        return triggering_packet
+
+    def initiating_packet(self, rv_id, r_min, r_max, cluster_stamp):
+        initiating_packet = {
+            "packet-type": "INITIATING Packet",
+            "rv_id": rv_id,
+            "r-min": r_min,
+            "r-max": r_max,
+            "cluster-stamp": cluster_stamp
+        }
+
+        return initiating_packet
+
+    def announce_packet(self, ch_id, cluster_stamp):
+        announce_packet = {
+            "packet-type": "ANNOUNCE Packet",
+            "ch-id": ch_id,
+            "cluster-stamp": cluster_stamp
+        }
+
+        return announce_packet
+
+    def ack_packet_cm(self, cm_id, cluster_stamp):
+        ack_packet_cm = {
+            "packet-type": "ACK Packet",
+            "cm-id": cm_id,
+            "cluster-stamp": cluster_stamp
+        }
+
+        return ack_packet_cm
+
+    def ack_packet_ch(self, ch_id, nb_cm, cluster_stamp, cluster_members):
+        ack_packet_ch = {
+            "packet-type": "ACK Packet",
+            "ch-id": ch_id,
+            "nb-cm": nb_cm,
+            "cluster-stamp": cluster_stamp,
+            "cluster_members": cluster_members
+        }
+
+        return ack_packet_ch
+
+    def invite_packet(self, current_ch, target_ch, cluster_stamp):
+        invite_packet = {
+            "packet-type": "INVITE Packet",
+            "current_ch": current_ch,
+            "target_ch": target_ch,
+            "cluster_stamp": cluster_stamp
+        }
+        return invite_packet
+
+    def confirm_packet(self, target_ch, current_ch, cluster_stamp):
+        confirm_packet = {
+            "packet-type": "CONFIRM Packet",
+            "current_ch": current_ch,
+            "target_ch": target_ch,
+            "cluster_stamp": cluster_stamp
+        }
+        return confirm_packet
+
+    def update_list_packet(self, current_ch, target_ch, nb_cm, cluster_stamp, cluster_members):
+        update_list_packet = {
+            "packet-type": "UPDATELIST Packet",
+            "current_ch": current_ch,
+            "nb_cm": nb_cm,
+            "target_ch": target_ch,
+            "cluster_stamp": cluster_stamp,
+            "cluster_members": cluster_members
+        }
+        return update_list_packet
+
+    def ch_update_packet(self, current_ch, cluster_stamp, target_ch):
+        ch_update_packet = {
+            "packet-type": "CHUPDATE Packet",
+            "current_ch": current_ch,
+            "target_ch": target_ch,
+            "cluster_stamp": cluster_stamp
+        }
+        return ch_update_packet
+    
+    def send_packet(client_id, payload, topic):
+        client.publish(topic, payload)
+       
+
+
+    def receive_packet(client_id, packet, topic):
+
+
+
