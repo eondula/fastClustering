@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import time
 import sys
 import random
+import timeit
 
 # Connection script
 # This connection script borrows implementation by Steve's Internet Guide blog --> MQTT Python
@@ -14,14 +15,14 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Bad connection Returned code=",rc)
 
+client_id = f'carla-comm-application-{random.randint(0, 1000)}' #client_id for connecting to broker instance
+client = mqtt.Client(client_id)
 mqtt.Client.connected_flag=False#create flag in class
-broker="127.0.0.1" #localhost
-client_id = f'python-mqtt-{random.randint(0, 1000)}' #client_id for connecting to broker instance 
+broker="127.0.0.1" #localhost 
 print("Connecting to broker ",broker)
 client.on_connect=on_connect  #bind call back function
 client.loop_start()
-client = mqtt.Client(client_id)
-client.connect(broker)      #connect to broker
+client.connect(broker) #connect to broker
 while not client.connected_flag: #wait in loop
     print("In wait loop")
     time.sleep(1)
@@ -156,19 +157,23 @@ class VehicleAgent:
     
     def send_packet(self, payload, topic):
         result = client.publish(topic, payload)
+        print(result)
         return result[0]
        
 
     def receive_packet(self, topic, quality_of_service):
+        start = timeit.default_timer()
+        my_data_file = open("data.txt", 'wb')
         def read_received_message(client, userdata, msg):
             print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
         client.subscribe(topic, quality_of_service)
         client.on_message = read_received_message
-
+        stop = timeit.default_timer()
+        latency = stop - start
+        my_data_file.write(bytes(str(latency), 'utf-8'))
+        my_data_file.close()
 
     def disconnect_comms(self):
         client.loop_stop
         client.disconnect()
-
-
