@@ -1,5 +1,7 @@
 import paho.mqtt.client as mqtt
 import time
+import sys
+import random
 
 # Connection script
 # This connection script borrows implementation by Steve's Internet Guide blog --> MQTT Python
@@ -14,17 +16,16 @@ def on_connect(client, userdata, flags, rc):
 
 mqtt.Client.connected_flag=False#create flag in class
 broker="127.0.0.1" #localhost
-client = mqtt.Client("python1")             #create new instance 
+client_id = f'python-mqtt-{random.randint(0, 1000)}' #client_id for connecting to broker instance 
+print("Connecting to broker ",broker)
 client.on_connect=on_connect  #bind call back function
 client.loop_start()
-print("Connecting to broker ",broker)
+client = mqtt.Client(client_id)
 client.connect(broker)      #connect to broker
 while not client.connected_flag: #wait in loop
     print("In wait loop")
     time.sleep(1)
 print("in Main Loop")
-client.loop_stop()    #Stop loop 
-client.disconnect() # disconnect
 
 class VehicleAgent:
     """
@@ -41,6 +42,8 @@ class VehicleAgent:
         self.transmission_range = 50
         self.client_id = self.node_id
         self.packet_queue = []
+        self.client = self.node_id
+        
 
     def set_state(self, value):
         self.state = value
@@ -71,7 +74,7 @@ class VehicleAgent:
             "r-min": r_min,
             "r-max": r_max,
         }
-        return triggering_packet
+        return str(triggering_packet)
 
     def initiating_packet(self, rv_id, r_min, r_max, cluster_stamp):
         initiating_packet = {
@@ -152,11 +155,20 @@ class VehicleAgent:
         return ch_update_packet
     
     def send_packet(self, payload, topic):
-        return client.publish(topic, payload)
+        result = client.publish(topic, payload)
+        return result[0]
        
 
-    def receive_packet(self, payload, topic):
-        return client.subscribe(topic, payload)
+    def receive_packet(self, topic, quality_of_service):
+        def read_received_message(client, userdata, msg):
+            print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
+        client.subscribe(topic, quality_of_service)
+        client.on_message = read_received_message
+
+
+    def disconnect_comms(self):
+        client.loop_stop
+        client.disconnect()
 
 
