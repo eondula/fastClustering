@@ -1,0 +1,2 @@
+# TODO: The current implementation will require one to manually read the latency for cluster head election. 
+# Next steps is to implement code for analyze overral cluster assuming devices with different communication ranges, densities and payload
