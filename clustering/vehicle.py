@@ -28,8 +28,7 @@ client.disconnect() # disconnect
 
 class VehicleAgent:
     """
-    The class attributes are considered as network variables and methods as information stored on the memory
-    of the device.
+    The class attributes are considered as network variables and methods as application programmable interface
     """
     def __init__(self, node_id, velocity=None, location=None, direction=None, position=None, state=None):
         self.node_id = node_id
@@ -45,6 +44,9 @@ class VehicleAgent:
 
     def set_state(self, value):
         self.state = value
+    
+    def set_position(self, value):
+        self.position = value
 
     def add_neighbor(self, node_id):
         self.neighbors.append(node_id)
@@ -150,11 +152,11 @@ class VehicleAgent:
         return ch_update_packet
     
     def send_packet(self, payload, topic):
-        client.publish(topic, payload)
+        return client.publish(topic, payload)
        
 
     def receive_packet(self, payload, topic):
-        client.subscribe(topic, payload)
+        return client.subscribe(topic, payload)
 
 
 
