@@ -1,9 +1,36 @@
 import paho.mqtt.client as mqtt
-host_name = "127.0.0.1"
-client = mqtt.Client(client_id)
-client.connect(host_name)
+import time
+
+# Connection script
+# This connection script borrows implementation by Steve's Internet Guide blog --> MQTT Python
+# http://www.steves-internet-guide.com/into-mqtt-python-client/
+
+def on_connect(client, userdata, flags, rc):
+    if rc==0:
+        client.connected_flag=True #set flag
+        print("connected OK")
+    else:
+        print("Bad connection Returned code=",rc)
+
+mqtt.Client.connected_flag=False#create flag in class
+broker="127.0.0.1" #localhost
+client = mqtt.Client("python1")             #create new instance 
+client.on_connect=on_connect  #bind call back function
+client.loop_start()
+print("Connecting to broker ",broker)
+client.connect(broker)      #connect to broker
+while not client.connected_flag: #wait in loop
+    print("In wait loop")
+    time.sleep(1)
+print("in Main Loop")
+client.loop_stop()    #Stop loop 
+client.disconnect() # disconnect
 
 class VehicleAgent:
+    """
+    The class attributes are considered as network variables and methods as information stored on the memory
+    of the device.
+    """
     def __init__(self, node_id, velocity=None, location=None, direction=None, position=None, state=None):
         self.node_id = node_id
         self.neighbors = []
@@ -14,6 +41,7 @@ class VehicleAgent:
         self.state = state
         self.transmission_range = 50
         self.client_id = self.node_id
+        self.packet_queue = []
 
     def set_state(self, value):
         self.state = value
@@ -121,12 +149,12 @@ class VehicleAgent:
         }
         return ch_update_packet
     
-    def send_packet(client_id, payload, topic):
+    def send_packet(self, payload, topic):
         client.publish(topic, payload)
        
 
-
-    def receive_packet(client_id, packet, topic):
+    def receive_packet(self, payload, topic):
+        client.subscribe(topic, payload)
 
 
 
