@@ -1,12 +1,10 @@
-# cs-651-research-project
-As pointed out by Hiroku (Introduction to the Modeling and Analysis of Complex Systems), 
-emergence is observed as systems scale while self-organization over time.
-Complex systems are hard to engineer. This project attempts to demystify the nuanced
+# Fast Clustering
+This project attempts to demystify the nuanced
 complexities as observed from a prototype software model that can be used to initiate the learning
 component of a neural network architecture assumed to be in control of content from public server. 
 In this case any remote [CARLA](http://carla.org/) server.
 
-### Mobility Model:
+## Mobility Model:
 
 
 ## How are vehicles simulated?
