@@ -1,7 +1,0 @@
-# Cluster Head Election Algorithm
-
-
-
-
-
-
